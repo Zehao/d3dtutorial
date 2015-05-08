@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleModelandIndexBuffer",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "two_view_ports", "two_view_ports\dx9_view_ports.vcxproj", "{571D0F90-0421-454D-8795-3CDC19C14A4F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AlphaChannel", "AlphaChannel\AlphaChannel.vcxproj", "{26F1A43D-6EBE-4F05-8C9B-3835BB2E1E54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -57,6 +59,10 @@ Global
 		{571D0F90-0421-454D-8795-3CDC19C14A4F}.Debug|Win32.Build.0 = Debug|Win32
 		{571D0F90-0421-454D-8795-3CDC19C14A4F}.Release|Win32.ActiveCfg = Release|Win32
 		{571D0F90-0421-454D-8795-3CDC19C14A4F}.Release|Win32.Build.0 = Release|Win32
+		{26F1A43D-6EBE-4F05-8C9B-3835BB2E1E54}.Debug|Win32.ActiveCfg = Debug|Win32
+		{26F1A43D-6EBE-4F05-8C9B-3835BB2E1E54}.Debug|Win32.Build.0 = Debug|Win32
+		{26F1A43D-6EBE-4F05-8C9B-3835BB2E1E54}.Release|Win32.ActiveCfg = Release|Win32
+		{26F1A43D-6EBE-4F05-8C9B-3835BB2E1E54}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
