@@ -92,9 +92,9 @@ bool d3d::InitD3D(
 	d3dpp.BackBufferHeight = height;
 	d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8;
 	d3dpp.BackBufferCount = 1;
-	d3dpp.MultiSampleType = D3DMULTISAMPLE_NONE;
+	d3dpp.MultiSampleType = D3DMULTISAMPLE_NONE; //全屏时抗锯齿
 	d3dpp.MultiSampleQuality = 0;
-	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
+	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;//交换链中最有效的DISCARD
 	d3dpp.hDeviceWindow = hwnd;
 	d3dpp.Windowed = windowed;
 	d3dpp.EnableAutoDepthStencil = true;
