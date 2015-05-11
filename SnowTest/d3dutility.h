@@ -97,4 +97,8 @@ bool initD3d(){
 	return true;
 }
 
+void renderFrame(){
+
+}
+
 #endif

@@ -13,6 +13,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//initialize Direct3D
 	initD3d();
 
+	//init light
+	//initLight();
+
+	g_device->SetRenderState(D3DRS_LIGHTING, TRUE); //灯光
+	g_device->SetRenderState(D3DRS_ZENABLE, TRUE);
+	g_device->SetRenderState(D3DRS_NORMALIZENORMALS, TRUE);    //法线标准化
+
 	// enter the main loop:
 
 	MSG msg;
@@ -28,7 +35,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		if (msg.message == WM_QUIT)
 			break;
 
-		//render_frame();
+		renderFrame();
 	}
 
 	//do clean job
