@@ -6,6 +6,11 @@
 #include <string>
 
 /*
+	天空盒边长，其为一个立方体
+*/
+static const int SKYBOX_SIZE = 512;
+
+/*
 	天空盒顶点格式
 */
 struct SkyBoxVertex
@@ -17,7 +22,12 @@ struct SkyBoxVertex
 
 /*
 天空盒，包含前、后、左、右、上共5个面。
+
+天空盒顶点包括位置坐标和纹理坐标，顶点数据通过D3DPT_TRIANGLESTRIP模式
+绘制时，可以不需要索引缓冲。
+
 纹理从图片资源中读取。
+
 */
 class SkyBox{
 
@@ -27,10 +37,14 @@ private:
 	IDirect3DVertexBuffer9* vbuf;  //顶点缓冲
 
 public:
-	bool createTextureFromFile(std::string filepath);
+	void initTexture(std::string filepath);
 
-	bool initVertexs();
-	SkyBox();
+	void initVertexs();
+
+public:
+
+	SkyBox(IDirect3DDevice9* dev);
+
 	virtual ~SkyBox();
 };
 

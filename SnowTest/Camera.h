@@ -3,10 +3,13 @@
 
 #include <d3d9.h>
 #include <d3dx9.h>
-/*
-	摄像机类，控制viewport
 
-	部分参考 Frank Luna 的 Introduction to 3D Game Programming with DirectX 9.0
+/*
+	摄像机类，包括了位置和3个方向（轴），可以向不同的方向旋转和移动。
+
+	类中最主要的是获取viewport变换矩阵的getViewportMatrix方法，
+	参考 Frank Luna 的 Introduction to 3D Game Programming with DirectX 9.0
+
 */
 
 class Camera{
