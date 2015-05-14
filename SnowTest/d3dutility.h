@@ -94,6 +94,7 @@ bool initD3d(){
 		return false;
 	}
 	g_d3d->Release();
+
 	return true;
 }
 

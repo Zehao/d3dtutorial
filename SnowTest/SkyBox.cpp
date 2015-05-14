@@ -31,7 +31,7 @@ void SkyBox::initTexture(std::string filepath){
 	std::string path[] = { "front", "back", "left", "right", "top" };
 
 	for (int i = 0; i < 5; i++){
-		std::string tmp = filepath + "//" + path[i];
+		std::string tmp = filepath + "//" + path[i] +".jpg";
 		D3DXCreateTextureFromFile(this->dev, tmp.c_str(), &(this->tex[i]));
 	}
 
@@ -80,4 +80,32 @@ void SkyBox::initVertexs(){
 	memcpy(tmp, vertex, sizeof(vertex));
 
 	vbuf->Unlock();
+}
+
+void SkyBox::draw(Camera* cam){
+
+	dev->SetFVF(SkyBoxVertex::FVF);
+	//dev->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_POINT);//Mipmaps过滤器
+
+	//纹理寻址方式为镜像模式
+	dev->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_MIRROR);
+	dev->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_MIRROR);
+
+	//天空盒跟随摄像机移动
+	D3DXVECTOR3 pos;
+	cam->getPosition(&pos);
+	D3DXMATRIX matPre,mat;
+
+	dev->GetTransform(D3DTS_WORLD, &matPre);
+	D3DXMatrixTranslation(&mat, pos.x, pos.y, pos.z);
+	dev->SetTransform(D3DTS_WORLD, &mat);
+
+	dev->SetStreamSource(0, vbuf, 0, sizeof(SkyBoxVertex));
+
+	for (int i = 0; i < 5; i++){
+		dev->SetTexture(0, tex[i]);
+		dev->DrawPrimitive(D3DPT_TRIANGLESTRIP, i * 4, 2);//每4个点绘制2个三角形
+	}
+
+	dev->SetTransform(D3DTS_WORLD, &matPre); //还原世界矩阵
 }
