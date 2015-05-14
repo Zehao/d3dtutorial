@@ -5,11 +5,24 @@
 #include <d3dx9.h>
 #include <string>
 
+/*
+	地形类.
+	通过加载灰度图来设置地形高度，TERRAIN_MAX_HEIGHT设置地形的最大高度，以此按比例缩放
+	高度。
+
+
+*/
+
+const int TERRAIN_MAX_HEIGHT = 100;
+
 class Terrain
 {
 private:
 	int heightmapSize;
-	unsigned char *heightmapData;
+	unsigned char *heightmapData;  //地形数据
+	IDirect3DTexture9 *tex;              //纹理
+	IDirect3DDevice9* dev;
+
 
 public:
 	void initTexture(std::string path);
@@ -17,7 +30,7 @@ public:
 	void draw();
 
 public:
-	Terrain();
+	Terrain(IDirect3DDevice9* dev);
 	~Terrain();
 
 
