@@ -76,6 +76,12 @@
     <ClCompile Include="d3dUtility.cpp" />
     <ClCompile Include="texAlpha.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="alphachannel.bmp" />
+    <Image Include="crate.jpg" />
+    <Image Include="cratewalpha.dds" />
+    <Image Include="lobbyxpos.JPG" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
