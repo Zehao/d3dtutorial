@@ -28,3 +28,7 @@ void Terrain::initHeightMap(std::string rawHeightmapPath , int size){
 void Terrain::initTexture(std::string path){
 	D3DXCreateTextureFromFile(this->dev, path.c_str(), &(this->tex));
 }
+
+void Terrain::draw(){
+
+}
