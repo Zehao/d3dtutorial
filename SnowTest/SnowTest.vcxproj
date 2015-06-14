@@ -78,6 +78,22 @@
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="Terrain.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="res\myheight.psd" />
+    <None Include="res\myheight.raw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\snowblind\back.jpg" />
+    <Image Include="res\snowblind\front.jpg" />
+    <Image Include="res\snowblind\left.jpg" />
+    <Image Include="res\snowblind\right.jpg" />
+    <Image Include="res\snowblind\top.jpg" />
+    <Image Include="res\wintermount\back.jpg" />
+    <Image Include="res\wintermount\front.jpg" />
+    <Image Include="res\wintermount\left.jpg" />
+    <Image Include="res\wintermount\right.jpg" />
+    <Image Include="res\wintermount\top.jpg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

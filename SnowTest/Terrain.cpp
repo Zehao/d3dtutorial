@@ -14,6 +14,7 @@ Terrain::~Terrain()
 
 void Terrain::initHeightMap(std::string rawHeightmapPath , int size){
 	this->heightmapSize = size;
+	//¶ÁÈ¡rawÎÄ¼ş
 	std::ifstream fin(rawHeightmapPath, std::ios::binary);
 
 	heightmapData = new unsigned char[size*size];
