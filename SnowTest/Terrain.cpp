@@ -1,6 +1,8 @@
 #include "Terrain.h"
 #include <fstream>
 
+const DWORD TerrainVertex::FVF = D3DFVF_XYZ | D3DFVF_TEX1;
+
 Terrain::Terrain(IDirect3DDevice9* dev) :heightmapData(0), tex(0){
 	this->dev = dev;
 }

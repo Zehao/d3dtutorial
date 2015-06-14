@@ -16,11 +16,11 @@
     <Filter Include="资源文件\res">
       <UniqueIdentifier>{e569f172-5e1d-442b-8000-c8ae3d493d8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件\res\winterMount">
-      <UniqueIdentifier>{f08f08ce-9cab-4c3b-b83f-a7cee7f853a8}</UniqueIdentifier>
+    <Filter Include="资源文件\res\snowblind">
+      <UniqueIdentifier>{e156f122-01ec-4108-9961-1a959819a6a2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件\res\snowBlind">
-      <UniqueIdentifier>{28886f22-81fc-4750-8cbc-9c760a25ee2b}</UniqueIdentifier>
+    <Filter Include="资源文件\res\wintermount">
+      <UniqueIdentifier>{ad01ad61-d514-4bb7-8620-1e0141a94a95}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,35 +63,35 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\snowblind\back.jpg">
-      <Filter>资源文件\res\snowBlind</Filter>
-    </Image>
-    <Image Include="res\snowblind\front.jpg">
-      <Filter>资源文件\res\snowBlind</Filter>
-    </Image>
-    <Image Include="res\snowblind\left.jpg">
-      <Filter>资源文件\res\snowBlind</Filter>
-    </Image>
-    <Image Include="res\snowblind\right.jpg">
-      <Filter>资源文件\res\snowBlind</Filter>
-    </Image>
-    <Image Include="res\snowblind\top.jpg">
-      <Filter>资源文件\res\snowBlind</Filter>
-    </Image>
     <Image Include="res\wintermount\back.jpg">
-      <Filter>资源文件\res\winterMount</Filter>
+      <Filter>资源文件\res\wintermount</Filter>
     </Image>
     <Image Include="res\wintermount\front.jpg">
-      <Filter>资源文件\res\winterMount</Filter>
+      <Filter>资源文件\res\wintermount</Filter>
     </Image>
     <Image Include="res\wintermount\left.jpg">
-      <Filter>资源文件\res\winterMount</Filter>
+      <Filter>资源文件\res\wintermount</Filter>
     </Image>
     <Image Include="res\wintermount\right.jpg">
-      <Filter>资源文件\res\winterMount</Filter>
+      <Filter>资源文件\res\wintermount</Filter>
     </Image>
     <Image Include="res\wintermount\top.jpg">
-      <Filter>资源文件\res\winterMount</Filter>
+      <Filter>资源文件\res\wintermount</Filter>
+    </Image>
+    <Image Include="res\snowblind\back.jpg">
+      <Filter>资源文件\res\snowblind</Filter>
+    </Image>
+    <Image Include="res\snowblind\front.jpg">
+      <Filter>资源文件\res\snowblind</Filter>
+    </Image>
+    <Image Include="res\snowblind\left.jpg">
+      <Filter>资源文件\res\snowblind</Filter>
+    </Image>
+    <Image Include="res\snowblind\right.jpg">
+      <Filter>资源文件\res\snowblind</Filter>
+    </Image>
+    <Image Include="res\snowblind\top.jpg">
+      <Filter>资源文件\res\snowblind</Filter>
     </Image>
   </ItemGroup>
 </Project>

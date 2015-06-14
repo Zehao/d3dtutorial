@@ -15,6 +15,12 @@
 
 const int TERRAIN_MAX_HEIGHT = 100;
 
+struct TerrainVertex{
+	int x, y, z;
+	int u, v;
+	static const DWORD FVF;
+};
+
 class Terrain
 {
 private:
