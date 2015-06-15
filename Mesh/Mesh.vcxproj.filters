@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\Administrator\Desktop\Source Code\Part III Code\Chapter 10\D3DXCreateMeshFVF\d3dUtility.h">
+    <ClInclude Include="d3dUtility.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\Administrator\Desktop\Source Code\Part III Code\Chapter 10\D3DXCreateMeshFVF\d3dUtility.cpp">
+    <ClCompile Include="d3dUtility.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Administrator\Desktop\Source Code\Part III Code\Chapter 10\D3DXCreateMeshFVF\d3dxcreatemeshfvf.cpp">
+    <ClCompile Include="d3dxcreatemeshfvf.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

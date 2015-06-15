@@ -11,11 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\Administrator\Desktop\Source Code\Part III Code\Chapter 10\D3DXCreateMeshFVF\d3dUtility.h" />
+    <ClInclude Include="d3dUtility.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\Administrator\Desktop\Source Code\Part III Code\Chapter 10\D3DXCreateMeshFVF\d3dUtility.cpp" />
-    <ClCompile Include="C:\Users\Administrator\Desktop\Source Code\Part III Code\Chapter 10\D3DXCreateMeshFVF\d3dxcreatemeshfvf.cpp" />
+    <ClCompile Include="d3dUtility.cpp" />
+    <ClCompile Include="d3dxcreatemeshfvf.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="C:\Users\Administrator\Desktop\Source Code\Part III Code\Chapter 10\D3DXCreateMeshFVF\brick0.jpg" />

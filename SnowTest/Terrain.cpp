@@ -22,8 +22,8 @@ void Terrain::initHeightMap(std::string rawHeightmapPath , int size){
 
 	heightmapData = new unsigned char[size*size];
 	
-	fin.read((char *)heightmapData, size*size*sizeof(char));
-
+	fin.read((char *)heightmapData, size*size);
+	
 	fin.close();
 
 
@@ -54,14 +54,16 @@ void Terrain::generateVertex(){
 
 	TerrainVertex *vertex = NULL;
 
-	vbuf->Lock(0, heightmapSize*heightmapSize, (void **)&vertex, 0);
+	vbuf->Lock(0, 0, (void **)&vertex, 0);
 
 	int row = 0;
-	for (int x = -heightmapSize / 2; x <= heightmapSize / 2; x += 2){
+	for (int z = -heightmapSize / 2; z < heightmapSize / 2; z += 1){
 		int col = 0;
-		for (int z = heightmapSize / 2; z >= -heightmapSize / 2; z -= 2){
+		for (int x = heightmapSize / 2; x > -heightmapSize / 2; x -= 1){
 			int idx = row*heightmapSize + col;
-			vertex[idx] = { x, ((float)heightmapData[idx]) / 255 * TERRAIN_MAX_HEIGHT, z, col*delta, row * delta };
+			//顶点y值按灰度值的比例确定
+			vertex[idx] = { x*2.0f, ((float)heightmapData[idx]) / 255 * TERRAIN_MAX_HEIGHT, z*2.0f, col*delta, row * delta };
+			//vertex[idx] = { x*2.0f, 0.0f, z*2.0f, col*delta, row * delta };
 			col++;
 		}
 		row++;
@@ -72,22 +74,49 @@ void Terrain::generateVertex(){
 
 	//设置顶点索引数据
 	int numTriangles = (heightmapSize - 1)*(heightmapSize - 1) * 2;
-	res = dev->CreateIndexBuffer(numTriangles * sizeof(WORD), D3DUSAGE_WRITEONLY, D3DFMT_INDEX16, D3DPOOL_MANAGED, &ibuf, 0);
+	res = dev->CreateIndexBuffer(numTriangles *3* sizeof(WORD), D3DUSAGE_WRITEONLY, D3DFMT_INDEX16, D3DPOOL_MANAGED, &ibuf, 0);
 
 	assert(SUCCEEDED(res));
 
 	WORD *index = 0;
 
+	ibuf->Lock(0, 0, (void **)&index, 0);
+	int cur = 0;
 	for (int i = 0; i < numRow; i++){
 		for (int j = 0; j < numCol; j++){
+			index[cur] = numRow * i + j;
+			index[cur+1] = numRow * i + j + 1;
+			index[cur+2] = numRow * (i+1) + j;
 
+			index[cur + 3] = index[cur + 2];
+			index[cur + 4] = index[cur + 1];
+			index[cur + 5] = numRow * (i + 1) + j+1;
+			cur += 6;
 		}
+
 	}
+	ibuf->Unlock();
 
 }
 
 void Terrain::draw(){
 
+	D3DXMATRIX mat;
+	D3DXMatrixIdentity(&mat);
+
+	dev->SetTransform(D3DTS_WORLD, &mat);
+
+	dev->SetFVF(TerrainVertex::FVF);
+	dev->SetStreamSource(0, vbuf, 0, sizeof(TerrainVertex));
+	dev->SetIndices(ibuf);
+	dev->SetTexture(0, this->tex);
+	dev->SetRenderState(D3DRS_LIGHTING, false);
+
+	dev->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
+	dev->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
+	dev->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
+
+	dev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, heightmapSize*heightmapSize, 0, (heightmapSize - 1)*(heightmapSize - 1) * 2);
 
 
 }

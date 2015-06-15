@@ -13,7 +13,7 @@
 
 */
 
-const int TERRAIN_MAX_HEIGHT = 100;
+const int TERRAIN_MAX_HEIGHT = 150;
 
 struct TerrainVertex{
 	float x, y, z;

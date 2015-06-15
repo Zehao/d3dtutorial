@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include "Camera.h"
 #include "SkyBox.h"
+#include "Terrain.h"
 
 #pragma comment (lib, "d3d9.lib")
 #pragma comment (lib, "d3dx9.lib")
@@ -26,9 +27,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	MSG msg;
 	Camera *camera = new Camera();
+
+
 	SkyBox *skybox = new SkyBox(g_device);
 	skybox->initTexture("res/snowblind");
 	skybox->initVertexs();
+
+	Terrain *terrain = new Terrain(g_device);
+	terrain->initTexture("res/terrainTex.jpg");
+	terrain->initHeightMap("res/heightmap.raw", 256);
+	terrain->generateVertex();
 	
 	while (TRUE)
 	{
@@ -43,11 +51,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		g_device->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 		Projection(60, 0, 1000);
-		D3DXVECTOR3 pos(0, 20, 0);
-		D3DXVECTOR3 target(0, 0,512);
+		D3DXVECTOR3 pos(0, 512, 700);
+		D3DXVECTOR3 target(0, 0,-512);
 		Viewport(pos, target);
+
 		g_device->BeginScene();
+
 		skybox->draw(camera);
+		terrain->draw();
+
 		g_device->EndScene();
 		g_device->Present(NULL, NULL, NULL, NULL);
 		//renderFrame();
