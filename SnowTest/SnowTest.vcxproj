@@ -88,6 +88,7 @@
     <Image Include="res\snowblind\left.jpg" />
     <Image Include="res\snowblind\right.jpg" />
     <Image Include="res\snowblind\top.jpg" />
+    <Image Include="res\terrainTex.jpg" />
     <Image Include="res\wintermount\back.jpg" />
     <Image Include="res\wintermount\front.jpg" />
     <Image Include="res\wintermount\left.jpg" />

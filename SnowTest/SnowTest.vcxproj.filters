@@ -93,5 +93,8 @@
     <Image Include="res\snowblind\top.jpg">
       <Filter>资源文件\res\snowblind</Filter>
     </Image>
+    <Image Include="res\terrainTex.jpg">
+      <Filter>资源文件\res</Filter>
+    </Image>
   </ItemGroup>
 </Project>
