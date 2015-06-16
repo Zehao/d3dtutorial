@@ -35,9 +35,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	Terrain *terrain = new Terrain(g_device);
 	terrain->initTexture("res/terrainTex.jpg");
-	terrain->initHeightMap("res/heightmap.raw", 256);
+	terrain->initHeightMap("res/hm.raw", 513);
 	terrain->generateVertex();
-	
+
 	while (TRUE)
 	{
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -51,7 +51,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		g_device->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 		Projection(60, 0, 1000);
-		D3DXVECTOR3 pos(0, 512, 700);
+		D3DXVECTOR3 pos(0, 212, 400);
 		D3DXVECTOR3 target(0, 0,-512);
 		Viewport(pos, target);
 
@@ -62,7 +62,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		g_device->EndScene();
 		g_device->Present(NULL, NULL, NULL, NULL);
-		//renderFrame();
+		
 	}
 
 	//do clean job

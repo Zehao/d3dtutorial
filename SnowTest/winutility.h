@@ -7,8 +7,8 @@
 */
 
 HWND g_hwnd = 0;
-const int g_width = 640;
-const int g_height = 480;
+const int g_width = 1024;
+const int g_height = 768;
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {

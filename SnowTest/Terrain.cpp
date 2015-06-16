@@ -33,8 +33,16 @@ void Terrain::initTexture(std::string path){
 	D3DXCreateTextureFromFile(this->dev, path.c_str(), &(this->tex));
 }
 
-int Terrain::operator()(int row, int col) const{
-	return heightmapData[row*heightmapSize + col];
+float Terrain::getHeight(float x, float z){
+	if (x < -256 || x > 256){
+		return 0;
+	}
+	if (z < -256 || z > 256){
+		return 0;
+	}
+
+	int idx = ((int)z + heightmapSize / 2)*heightmapSize + heightmapSize / 2 - (int)x;
+	return heightmapData[idx]/255.0 * TERRAIN_MAX_HEIGHT;
 }
 
 void Terrain::generateVertex(){
@@ -57,13 +65,13 @@ void Terrain::generateVertex(){
 	vbuf->Lock(0, 0, (void **)&vertex, 0);
 
 	int row = 0;
-	for (int z = -heightmapSize / 2; z < heightmapSize / 2; z += 1){
+	for (int z = -heightmapSize / 2; z <= heightmapSize / 2; z += 1){
 		int col = 0;
-		for (int x = heightmapSize / 2; x > -heightmapSize / 2; x -= 1){
+		for (int x = heightmapSize / 2; x >= -heightmapSize / 2; x -= 1){
 			int idx = row*heightmapSize + col;
 			//顶点y值按灰度值的比例确定
-			vertex[idx] = { x*2.0f, ((float)heightmapData[idx]) / 255 * TERRAIN_MAX_HEIGHT, z*2.0f, col*delta, row * delta };
-			//vertex[idx] = { x*2.0f, 0.0f, z*2.0f, col*delta, row * delta };
+			vertex[idx] = { x, ((float)heightmapData[idx]) / 255.0 * TERRAIN_MAX_HEIGHT, z, col*delta, row * delta };
+			//vertex[idx] = { x, 0.0f, z, col*delta, row * delta };
 			col++;
 		}
 		row++;
@@ -74,11 +82,11 @@ void Terrain::generateVertex(){
 
 	//设置顶点索引数据
 	int numTriangles = (heightmapSize - 1)*(heightmapSize - 1) * 2;
-	res = dev->CreateIndexBuffer(numTriangles *3* sizeof(WORD), D3DUSAGE_WRITEONLY, D3DFMT_INDEX16, D3DPOOL_MANAGED, &ibuf, 0);
+	res = dev->CreateIndexBuffer(numTriangles *3* sizeof(DWORD), D3DUSAGE_WRITEONLY, D3DFMT_INDEX32, D3DPOOL_MANAGED, &ibuf, 0);
 
 	assert(SUCCEEDED(res));
 
-	WORD *index = 0;
+	DWORD *index = 0;
 
 	ibuf->Lock(0, 0, (void **)&index, 0);
 	int cur = 0;
@@ -99,6 +107,9 @@ void Terrain::generateVertex(){
 
 }
 
+
+
+
 void Terrain::draw(){
 
 	D3DXMATRIX mat;
@@ -109,8 +120,15 @@ void Terrain::draw(){
 	dev->SetFVF(TerrainVertex::FVF);
 	dev->SetStreamSource(0, vbuf, 0, sizeof(TerrainVertex));
 	dev->SetIndices(ibuf);
+
 	dev->SetTexture(0, this->tex);
-	dev->SetRenderState(D3DRS_LIGHTING, false);
+	dev->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_MODULATE);
+	dev->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+	dev->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
+
+
+	//dev->SetRenderState(D3DRS_LIGHTING, false);
+	//dev->SetRenderState(D3DRS_AMBIENT, 0x00202020);
 
 	dev->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
 	dev->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);

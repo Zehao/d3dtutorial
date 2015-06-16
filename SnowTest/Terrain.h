@@ -13,7 +13,7 @@
 
 */
 
-const int TERRAIN_MAX_HEIGHT = 150;
+const int TERRAIN_MAX_HEIGHT = 200;
 
 struct TerrainVertex{
 	float x, y, z;
@@ -36,9 +36,9 @@ public:
 	void initHeightMap(std::string rawHeightmapPath , int size);//高度图位置与边长
 	void draw();
 	void generateVertex();
-	
-	int operator ()(int row, int col) const; //支持括号访问高度图
 
+	float getHeight(float x, float z);
+	
 public:
 	Terrain(IDirect3DDevice9* dev);
 	~Terrain();

@@ -79,6 +79,7 @@
     <ClCompile Include="Terrain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\hm.raw" />
     <None Include="res\myheight.psd" />
     <None Include="res\myheight.raw" />
   </ItemGroup>

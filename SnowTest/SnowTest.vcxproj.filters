@@ -61,6 +61,9 @@
     <None Include="res\myheight.raw">
       <Filter>资源文件\res</Filter>
     </None>
+    <None Include="res\hm.raw">
+      <Filter>资源文件\res</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\wintermount\back.jpg">
