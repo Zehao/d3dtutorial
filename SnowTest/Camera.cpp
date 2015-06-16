@@ -2,16 +2,16 @@
 
 Camera::Camera(){
 	this->pos = D3DXVECTOR3(0.0, 0.0, 0.0);
-	this->right = D3DXVECTOR3(0.0, 0.0, 0.0);
-	this->up = D3DXVECTOR3(0.0, 0.0, 0.0);
-	this->look = D3DXVECTOR3(0.0, 0.0, 0.0);
+	this->right = D3DXVECTOR3(1.0, 0.0, 0.0);
+	this->up = D3DXVECTOR3(0.0, 1.0, 0.0);
+	this->look = D3DXVECTOR3(0.0, 0.0, 1.0);
 }
 
 Camera::Camera(D3DXVECTOR3* pos){
 	this->pos = *pos;
-	this->right = D3DXVECTOR3(0.0, 0.0, 0.0);
-	this->up = D3DXVECTOR3(0.0, 0.0, 0.0);
-	this->look = D3DXVECTOR3(0.0, 0.0, 0.0);
+	this->right = D3DXVECTOR3(1.0, 0.0, 0.0);
+	this->up = D3DXVECTOR3(0.0, 1.0, 0.0);
+	this->look = D3DXVECTOR3(0.0, 0.0, 1.0);
 }
 
 Camera::~Camera(){

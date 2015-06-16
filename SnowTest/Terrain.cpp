@@ -70,8 +70,8 @@ void Terrain::generateVertex(){
 		for (int x = heightmapSize / 2; x >= -heightmapSize / 2; x -= 1){
 			int idx = row*heightmapSize + col;
 			//顶点y值按灰度值的比例确定
-			vertex[idx] = { x, ((float)heightmapData[idx]) / 255.0 * TERRAIN_MAX_HEIGHT, z, col*delta, row * delta };
-			//vertex[idx] = { x, 0.0f, z, col*delta, row * delta };
+			//vertex[idx] = { x, ((float)heightmapData[idx]) / 255.0 * TERRAIN_MAX_HEIGHT, z, col*delta, row * delta };
+			vertex[idx] = { x, 0.0f, z, col*delta, row * delta };
 			col++;
 		}
 		row++;

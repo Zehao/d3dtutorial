@@ -6,7 +6,7 @@
 */
 #include <d3d9.h>
 #include <d3dx9.h>
-#include "winutility.h"
+#include "Config.h"
 
 //global
 IDirect3D9* g_d3d = 0;
