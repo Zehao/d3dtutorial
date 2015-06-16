@@ -124,6 +124,16 @@ bool Display(float timeDelta)
 		TheCamera.getViewMatrix(&V);
 		Device->SetTransform(D3DTS_VIEW, &V);
 
+		//D3DXVECTOR3 posi(0, -900, 1);
+		//D3DXVECTOR3 target(0, 0, 0);
+		//D3DXMATRIX Vi;
+		//D3DXMatrixLookAtLH(
+		//	&Vi,
+		//	&posi,
+		//	&target,
+		//	&D3DXVECTOR3(0,1,0));
+		//Device->SetTransform(D3DTS_VIEW, &Vi);
+
 		//
 		// Draw the scene:
 		//
@@ -135,7 +145,7 @@ bool Display(float timeDelta)
 		D3DXMatrixIdentity(&I);
 
 		if( TheTerrain )
-			TheTerrain->draw(&I, false);
+			TheTerrain->draw(&I, true);
 
 		if( FPS )
 			FPS->render(0xffffffff, timeDelta);

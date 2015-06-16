@@ -13,12 +13,15 @@
 
 */
 
-const int TERRAIN_MAX_HEIGHT = 200;
+const int TERRAIN_MAX_HEIGHT = 100;
 
 struct TerrainVertex{
 	float x, y, z;
 	float u, v;
 	static const DWORD FVF;
+	TerrainVertex(float _x, float _y, float _z, float _u, float _v){
+		x = _x, y = _y, z = _z, u = _u, v = _v;
+	}
 };
 
 class Terrain

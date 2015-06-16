@@ -69,7 +69,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//initLight();
 
 	g_device->SetRenderState(D3DRS_LIGHTING, FALSE); //灯光
-	g_device->SetRenderState(D3DRS_ZENABLE, FALSE);
+	g_device->SetRenderState(D3DRS_ZENABLE, TRUE);
 	g_device->SetRenderState(D3DRS_NORMALIZENORMALS, TRUE);    //法线标准化
 
 	// enter the main loop:
@@ -87,11 +87,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	terrain->initHeightMap("res/hm.raw", 513);
 	terrain->generateVertex();
 
-	
-
-	static float previousTime = (float)timeGetTime(); //初始化时间
-	float currentTime;												  //当前时间
-	float deltaTime;                                                  //时间差
+	//g_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
 
 	while (TRUE)
 	{
@@ -110,45 +106,25 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		*/
 		D3DXVECTOR3 camPos;
 		camera->getPosition(&camPos);
-		camPos.y = terrain->getHeight(camPos.x, camPos.z) + 20.0f;
+		camPos.y = terrain->getHeight(camPos.x, camPos.z) + 5.0f;
 		camera->setPosition(&camPos);
 
-		currentTime = (float)timeGetTime();
-		deltaTime = (currentTime - previousTime)*0.001f;
-		previousTime = currentTime;
 
-		if (KEY_DOWN('W')){
-			camera->moveFB(CAM_MOVESPEED*deltaTime);
-		}
-		if (KEY_DOWN('A')){
-			camera->moveLR(-CAM_MOVESPEED*deltaTime);
-		}
-		if (KEY_DOWN('S')){
-			camera->moveFB(-CAM_MOVESPEED*deltaTime);
-		}
-		if (KEY_DOWN('D')){
-			camera->moveLR(CAM_MOVESPEED*deltaTime);
-		}
-		if (KEY_DOWN(VK_LBUTTON)){
-			
-		}else{
+		g_device->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+		Projection(45, 0, 1000);
 
-		}
-
-		g_device->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
-		Projection(60, 0, 1000);
-
-		D3DXVECTOR3 pos(0, 512, 700);
-		D3DXVECTOR3 target(0, 0,-512);
-		Viewport(pos, target);
+		D3DXVECTOR3 pos(0, 512,-512);
+		D3DXVECTOR3 target(0, 0,0);
+		//Viewport(pos, target);
 
 		D3DXMATRIX viewMat;
-		//camera->getViewportMatrix(&viewMat);
-		//g_device->SetTransform(D3DTS_VIEW, &viewMat);
-
+		camera->getViewportMatrix(&viewMat);
+		g_device->SetTransform(D3DTS_VIEW, &viewMat);
+		g_device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 		g_device->BeginScene();
-
-		skybox->draw(camera);
+		
+		//skybox->draw(camera);
+		
 		terrain->draw();
 
 		g_device->EndScene();
@@ -162,3 +138,51 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	return msg.wParam;
 }
 
+
+
+void computeMouse(){
+
+}
+
+void procCamera(Camera *camera){
+
+	static float previousTime = (float)timeGetTime(); //初始化时间
+
+	static POINT previousMousePoint;
+
+	g_currentTime = (float)timeGetTime();
+	g_deltaTime = (g_currentTime - previousTime)*0.001f;
+	previousTime = g_currentTime;
+
+	/*
+	获取按键输入
+	*/
+	bool isMousing;
+	if (KEY_DOWN('W')){
+		camera->moveFB(CAM_MOVESPEED*g_deltaTime);
+	}
+	if (KEY_DOWN('A')){
+		camera->moveLR(-CAM_MOVESPEED*g_deltaTime);
+	}
+	if (KEY_DOWN('S')){
+		camera->moveFB(-CAM_MOVESPEED*g_deltaTime);
+	}
+	if (KEY_DOWN('D')){
+		camera->moveLR(CAM_MOVESPEED*g_deltaTime);
+	}
+	if (KEY_DOWN(VK_LBUTTON)){
+		isMousing = true;
+	}
+	else{
+		isMousing = false;
+	}
+
+	POINT mousePoint;
+	GetCursorPos(&mousePoint);
+	ScreenToClient(g_hwnd, &mousePoint);
+
+	if (isMousing == true){
+
+	}
+
+}

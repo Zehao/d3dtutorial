@@ -84,6 +84,8 @@ void SkyBox::initVertexs(){
 
 void SkyBox::draw(Camera* cam){
 
+
+
 	dev->SetFVF(SkyBoxVertex::FVF);
 	//dev->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_POINT);//Mipmaps¹ýÂËÆ÷
 
@@ -97,8 +99,11 @@ void SkyBox::draw(Camera* cam){
 	D3DXMATRIX matPre,mat;
 
 	dev->GetTransform(D3DTS_WORLD, &matPre);
-	D3DXMatrixTranslation(&mat, pos.x, pos.y, pos.z);
+	D3DXMatrixTranslation(&mat, pos.x, 0, pos.z); //y²»±ä
 	dev->SetTransform(D3DTS_WORLD, &mat);
+
+	//dev->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);
+	//dev->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
 
 	dev->SetStreamSource(0, vbuf, 0, sizeof(SkyBoxVertex));
 
