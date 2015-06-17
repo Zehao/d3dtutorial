@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Terrain", "Terrain\Terrain.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Camera", "Camera\Camera.vcxproj", "{A953FF2D-FE16-4F1A-8177-9BCD70D20343}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SnowFlake", "SnowFlake\SnowFlake.vcxproj", "{2EC9153C-4504-45BC-9AB7-370F5F984955}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -87,6 +89,10 @@ Global
 		{A953FF2D-FE16-4F1A-8177-9BCD70D20343}.Debug|Win32.Build.0 = Debug|Win32
 		{A953FF2D-FE16-4F1A-8177-9BCD70D20343}.Release|Win32.ActiveCfg = Release|Win32
 		{A953FF2D-FE16-4F1A-8177-9BCD70D20343}.Release|Win32.Build.0 = Release|Win32
+		{2EC9153C-4504-45BC-9AB7-370F5F984955}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2EC9153C-4504-45BC-9AB7-370F5F984955}.Debug|Win32.Build.0 = Debug|Win32
+		{2EC9153C-4504-45BC-9AB7-370F5F984955}.Release|Win32.ActiveCfg = Release|Win32
+		{2EC9153C-4504-45BC-9AB7-370F5F984955}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
