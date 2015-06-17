@@ -45,6 +45,8 @@ void Camera::setPosition(D3DXVECTOR3* pos){
 	在这里貌似没有影响。
 */
 void Camera::transLook(float angleDegree){
+	//第一人称下屏蔽翻滚
+	return;
 	D3DXMATRIX t;
 	D3DXMatrixRotationAxis(&t, &look, D3DXToRadian(angleDegree)); //针对任意轴旋转
 	D3DXVec3TransformNormal(&right, &right, &t);
@@ -52,9 +54,14 @@ void Camera::transLook(float angleDegree){
 
 }
 
+/*
+	第一人称只能围绕y轴旋转
+
+*/
 void Camera::transUp(float angleDegree){
 	D3DXMATRIX t;
-	D3DXMatrixRotationAxis(&t, &up, D3DXToRadian(angleDegree));
+	D3DXMatrixRotationY(&t, D3DXToRadian(angleDegree));
+	//D3DXMatrixRotationAxis(&t, &up, D3DXToRadian(angleDegree));
 	D3DXVec3TransformNormal(&right, &right, &t);
 	D3DXVec3TransformNormal(&look, &look, &t);
 

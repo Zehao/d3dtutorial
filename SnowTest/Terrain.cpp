@@ -93,34 +93,26 @@ void Terrain::generateVertex(){
 
 	ibuf->Lock(0, 0, (void **)&index, 0);
 	int cur = 0;
-	//for (int i = 0; i < numRow; i++){
-	//	for (int j = 0; j < numCol; j++){
-	//		//index[cur] = numRow * i + j;
-	//		//index[cur+1] = numRow * i + j + 1;
-	//		//index[cur+2] = numRow * (i+1) + j;
-
-	//		//index[cur + 3] = index[cur + 2];
-	//		//index[cur + 4] = index[cur + 1];
-	//		//index[cur + 5] = numRow * (i + 1) + j+1;
-
-	//		index[cur] = numRow*i + j;
-	//		index[cur + 1] = numRow * i + j + 1;
-	//		index[cur + 2] = 
-	//		cur += 6;
-	//	}
-
-	//}
 
 	for (int i = 0; i < heightmapSize-1; i++){
 		for (int j = 0; j < heightmapSize-1; j++){
 
+			//index[cur] = heightmapSize*i + j;
+			//index[cur + 1] = heightmapSize*i + j + 1;
+			//index[cur + 2] = heightmapSize*(i + 1) + j + 1;
+
+			//index[cur + 3] = heightmapSize*(i + 1) + j + 1;
+			//index[cur + 4] = heightmapSize*(i + 1) + j;
+			//index[cur + 5] = heightmapSize*i + j;
+
+
 			index[cur] = heightmapSize*i + j;
 			index[cur + 1] = heightmapSize*i + j + 1;
-			index[cur + 2] = heightmapSize*(i + 1) + j + 1;
+			index[cur + 2] = heightmapSize*(i + 1) + j ;
 
-			index[cur + 3] = heightmapSize*(i + 1) + j + 1;
-			index[cur + 4] = heightmapSize*(i + 1) + j;
-			index[cur + 5] = heightmapSize*i + j;
+			index[cur + 3] = index[cur + 2];
+			index[cur + 4] = index[cur + 1];
+			index[cur + 5] = heightmapSize*(i + 1) + j+1;
 			cur += 6;
 		}
 	}
@@ -138,7 +130,7 @@ void Terrain::draw(){
 	D3DXMATRIX mat;
 	D3DXMatrixIdentity(&mat);
 
-	//dev->SetTransform(D3DTS_WORLD, &mat);
+	dev->SetTransform(D3DTS_WORLD, &mat);
 
 	dev->SetFVF(TerrainVertex::FVF);
 	dev->SetStreamSource(0, vbuf, 0, sizeof(TerrainVertex));

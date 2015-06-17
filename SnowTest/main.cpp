@@ -69,7 +69,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//initLight();
 
 	g_device->SetRenderState(D3DRS_LIGHTING, FALSE); //灯光
-	g_device->SetRenderState(D3DRS_ZENABLE, TRUE);
+	//g_device->SetRenderState(D3DRS_ZENABLE, FALSE);
 	g_device->SetRenderState(D3DRS_NORMALIZENORMALS, TRUE);    //法线标准化
 
 	// enter the main loop:
@@ -87,7 +87,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	terrain->initHeightMap("res/hm.raw", 513);
 	terrain->generateVertex();
 
-	//g_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
+	Projection(45, 1, 1000);
 
 	while (TRUE)
 	{
@@ -101,38 +101,27 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			break;
 
 
-		/**
-		Camera的高度受Terrain当前点的y值控制。
-		*/
-		D3DXVECTOR3 camPos;
-		camera->getPosition(&camPos);
-		camPos.y = terrain->getHeight(camPos.x, camPos.z) + 10.0f;
-		camera->setPosition(&camPos);
-
-
 		static float previousTime = (float)timeGetTime(); //初始化时间
 
-		static POINT previousMousePoint;
-
-		g_currentTime = (float)timeGetTime();
-		g_deltaTime = (g_currentTime - previousTime)*0.001f;
-		previousTime = g_currentTime;
+		float currentTime = (float)timeGetTime();
+		float deltaTime = (currentTime - previousTime)*0.001f;
+		previousTime = currentTime;
 
 		/*
 		获取按键输入
 		*/
 		bool isMousing;
 		if (KEY_DOWN('W')){
-			camera->moveFB(CAM_MOVESPEED*g_deltaTime);
+			camera->moveFB(CAM_MOVESPEED*deltaTime);
 		}
 		if (KEY_DOWN('A')){
-			camera->moveLR(-CAM_MOVESPEED*g_deltaTime);
+			camera->moveLR(-CAM_MOVESPEED*deltaTime);
 		}
 		if (KEY_DOWN('S')){
-			camera->moveFB(-CAM_MOVESPEED*g_deltaTime);
+			camera->moveFB(-CAM_MOVESPEED*deltaTime);
 		}
 		if (KEY_DOWN('D')){
-			camera->moveLR(CAM_MOVESPEED*g_deltaTime);
+			camera->moveLR(CAM_MOVESPEED*deltaTime);
 		}
 		if (KEY_DOWN(VK_LBUTTON)){
 			isMousing = true;
@@ -141,14 +130,51 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			isMousing = false;
 		}
 
-		POINT mousePoint;
-		GetCursorPos(&mousePoint);
-		ScreenToClient(g_hwnd, &mousePoint);
+		static POINT previousMousePoint;
+
+		POINT currentMousePoint;
+		GetCursorPos(&currentMousePoint);
+		ScreenToClient(g_hwnd, &currentMousePoint);
 
 		if (isMousing == true){
-
+			int dx = currentMousePoint.x - previousMousePoint.x;
+			int dy = currentMousePoint.y - previousMousePoint.y;
+			if (dx != 0){
+				camera->transUp(dx / 30.0f);
+			}
+			if (dy != 0){
+				camera->transRight(dy / 30.0f);
+			}
 		}
-		render(camera,terrain,skybox);
+		previousMousePoint = currentMousePoint;
+
+		//Camera的高度受Terrain当前点的y值控制。
+		D3DXVECTOR3 camPos;
+		camera->getPosition(&camPos);
+		camPos.y = terrain->getHeight(camPos.x, camPos.z) + 10.0f;
+		camera->setPosition(&camPos);
+
+		D3DXMATRIX viewMat;
+		camera->getViewportMatrix(&viewMat);
+		g_device->SetTransform(D3DTS_VIEW, &viewMat);
+
+		//D3DXVECTOR3 pos(0, 512, -512);
+		//D3DXVECTOR3 target(0, 0, 0);
+		//Viewport(pos, target);
+
+		g_device->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+		g_device->BeginScene();
+
+		skybox->draw(camera);
+		terrain->draw();
+
+		g_device->EndScene();
+		g_device->Present(NULL, NULL, NULL, NULL);
+
+
+
+
+		//render(camera,terrain,skybox);
 		
 	}
 
@@ -165,25 +191,5 @@ void computeMouse(){
 }
 
 void render(Camera *camera,Terrain *terrain, SkyBox *skybox){
-
-	g_device->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
-	Projection(45, 0, 1000);
-
-	D3DXVECTOR3 pos(0, 512, -512);
-	D3DXVECTOR3 target(0, 0, 0);
-	//Viewport(pos, target);
-
-	D3DXMATRIX viewMat;
-	camera->getViewportMatrix(&viewMat);
-	g_device->SetTransform(D3DTS_VIEW, &viewMat);
-	//g_device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-	g_device->BeginScene();
-
-	//skybox->draw(camera);
-
-	terrain->draw();
-
-	g_device->EndScene();
-	g_device->Present(NULL, NULL, NULL, NULL);
 
 }
