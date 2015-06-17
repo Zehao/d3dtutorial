@@ -40,8 +40,10 @@ float Terrain::getHeight(float x, float z){
 	if (z < -256 || z > 256){
 		return 0;
 	}
+	int row = heightmapSize / 2 - z;
+	int col = x + heightmapSize / 2;
+	int idx = row*heightmapSize + col;
 
-	int idx = ((int)z + heightmapSize / 2)*heightmapSize + heightmapSize / 2 - (int)x;
 	return heightmapData[idx]/255.0 * TERRAIN_MAX_HEIGHT;
 }
 
@@ -54,9 +56,7 @@ void Terrain::generateVertex(){
 	/*
 	设置地形的行列数为heightmap的size。
 	*/
-	int numRow = heightmapSize - 1;
-	int numCol = heightmapSize - 1;
-	float delta = 1.0f / numRow;
+	float delta = 1.0f / (heightmapSize - 1);
 
 	//设置顶点数据
 
@@ -64,18 +64,20 @@ void Terrain::generateVertex(){
 
 	vbuf->Lock(0, 0, (void **)&vertex, 0);
 
-	int row = 0;
-	for (int z = -heightmapSize / 2; z <= heightmapSize / 2; z += 1){
-		int col = 0;
-		for (int x = heightmapSize / 2; x >= -heightmapSize / 2; x -= 1){
+
+	for (int z = heightmapSize / 2; z >= -heightmapSize / 2;z -= 1){
+
+		for (int x = -heightmapSize / 2; x <= heightmapSize / 2; x += 1){
+
+			int row = heightmapSize / 2 - z;
+			int col = x + heightmapSize / 2;
 			int idx = row*heightmapSize + col;
+
 			//顶点y值按灰度值的比例确定
 			//vertex[idx] = { x, ((float)heightmapData[idx]) / 255.0 * TERRAIN_MAX_HEIGHT, z, col*delta, row * delta };
 			vertex[idx] = TerrainVertex(x, ((float)heightmapData[idx]) / 255.0 * TERRAIN_MAX_HEIGHT, z, col*delta, row * delta);
-			//vertex[idx] = { x, 0.0f, z, col*delta, row * delta };
-			col++;
+			//vertex[idx] = TerrainVertex(x, 0.0f, z, col*delta, row * delta);
 		}
-		row++;
 	}
 
 	vbuf->Unlock();
@@ -111,13 +113,14 @@ void Terrain::generateVertex(){
 
 	for (int i = 0; i < heightmapSize-1; i++){
 		for (int j = 0; j < heightmapSize-1; j++){
+
 			index[cur] = heightmapSize*i + j;
-			index[cur+1] = heightmapSize*i + j+1;
+			index[cur + 1] = heightmapSize*i + j + 1;
 			index[cur + 2] = heightmapSize*(i + 1) + j + 1;
 
-			index[cur + 3] = heightmapSize*i + j;
-			index[cur + 4] = heightmapSize*(i + 1) + j + 1;
-			index[cur + 5] = heightmapSize*(i + 1) + j;
+			index[cur + 3] = heightmapSize*(i + 1) + j + 1;
+			index[cur + 4] = heightmapSize*(i + 1) + j;
+			index[cur + 5] = heightmapSize*i + j;
 			cur += 6;
 		}
 	}
