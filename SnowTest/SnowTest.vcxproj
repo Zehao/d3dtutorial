@@ -69,6 +69,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="d3dutility.h" />
     <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="SnowMan.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Config.h" />
   </ItemGroup>
@@ -76,12 +77,14 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="SnowMan.cpp" />
     <ClCompile Include="Terrain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\hm.raw" />
     <None Include="res\myheight.psd" />
     <None Include="res\myheight.raw" />
+    <None Include="res\Snowman.x" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\snowblind\back.jpg" />

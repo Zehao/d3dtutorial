@@ -4,6 +4,8 @@
 #include "Camera.h"
 #include "SkyBox.h"
 #include "Terrain.h"
+#include "SnowMan.h"
+
 
 #pragma comment (lib, "d3d9.lib")
 #pragma comment (lib, "d3dx9.lib")
@@ -87,6 +89,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	terrain->initHeightMap("res/hm.raw", 513);
 	terrain->generateVertex();
 
+	SnowMan *snowMan = new SnowMan(g_device,terrain, "res/Snowman.x");
+	snowMan->initMesh();
+
 	Projection(45, 1, 1000);
 
 	while (TRUE)
@@ -158,8 +163,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		camera->getViewportMatrix(&viewMat);
 		g_device->SetTransform(D3DTS_VIEW, &viewMat);
 
-		//D3DXVECTOR3 pos(0, 512, -512);
-		//D3DXVECTOR3 target(0, 0, 0);
+		D3DXVECTOR3 pos(0, 5 ,-50);
+		D3DXVECTOR3 target(0,0,0);
 		//Viewport(pos, target);
 
 		g_device->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
@@ -167,6 +172,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		skybox->draw(camera);
 		terrain->draw();
+		snowMan->draw();
 
 		g_device->EndScene();
 		g_device->Present(NULL, NULL, NULL, NULL);

@@ -36,6 +36,9 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SnowMan.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="d3dutility.h">
@@ -53,6 +56,9 @@
     <ClInclude Include="Config.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="SnowMan.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\myheight.psd">
@@ -62,6 +68,9 @@
       <Filter>资源文件\res</Filter>
     </None>
     <None Include="res\hm.raw">
+      <Filter>资源文件\res</Filter>
+    </None>
+    <None Include="res\Snowman.x">
       <Filter>资源文件\res</Filter>
     </None>
   </ItemGroup>

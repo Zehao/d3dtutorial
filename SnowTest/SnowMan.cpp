@@ -1,7 +1,7 @@
 #include "SnowMan.h"
 
 
-SnowMan::SnowMan(IDirect3DDevice9 *device, string path) :dev(device), xFilePath(path)
+SnowMan::SnowMan(IDirect3DDevice9 *device, Terrain *terr, string path) :dev(device),terrain(terr), xFilePath(path)
 {
 }
 
@@ -47,4 +47,47 @@ void SnowMan::initMesh(){
 	}
 	mtrlBuf->Release();
 
+}
+
+void SnowMan::draw(){
+
+	D3DXVECTOR3 pos;
+	pos.x = 0; 
+	pos.z = 0;
+	pos.y = terrain->getHeight(pos.x, pos.z)+2.0f;
+
+
+	D3DXMATRIX matTrans;
+	D3DXMatrixTranslation(&matTrans, pos.x, pos.y, pos.z);
+
+	D3DXMATRIX matRotation;
+	D3DXMatrixRotationAxis(&matRotation, &D3DXVECTOR3(1, 0, 0), D3DXToRadian(270)); //针对任意轴旋转
+	
+	D3DXMATRIX mat = matRotation*matTrans;
+	dev->SetTransform(D3DTS_WORLD, &mat);
+
+
+
+	//需要打上灯光
+	D3DLIGHT9 light;
+	memset(&light, 0, sizeof(light));
+
+	light.Type = D3DLIGHT_DIRECTIONAL;
+	light.Direction = D3DXVECTOR3(-1,-1,1);//根据天空盒太阳位置得出
+	D3DXCOLOR white = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	light.Ambient = white;
+	//light.Diffuse = white*0.4f;
+	//light.Specular = white * 0.6f;
+
+	dev->SetRenderState(D3DRS_ZENABLE, TRUE);
+	dev->SetRenderState(D3DRS_LIGHTING, TRUE); //灯光
+	dev->SetLight(0, &light);
+	dev->LightEnable(0, true);
+
+	for (int i = 0; i < material.size(); i++){
+		dev->SetMaterial(&material[i]);
+		dev->SetTexture(0, texture[i]);
+		mesh->DrawSubset(i);
+	}
+	dev->SetRenderState(D3DRS_LIGHTING, FALSE); //灯光
 }
