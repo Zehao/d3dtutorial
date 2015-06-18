@@ -15,8 +15,9 @@ Terrain::~Terrain()
 	}
 }
 
-void Terrain::initHeightMap(std::string rawHeightmapPath , int size){
+void Terrain::initHeightMap(std::string rawHeightmapPath , int size , int scale){
 	this->heightmapSize = size;
+	this->texScale = scale;
 	//读取raw文件
 	std::ifstream fin(rawHeightmapPath, std::ios::binary);
 
@@ -34,10 +35,13 @@ void Terrain::initTexture(std::string path){
 }
 
 float Terrain::getHeight(float x, float z){
-	if (x < -256 || x > 256){
+	x /= texScale;
+	z /= texScale;
+	int limit = this->heightmapSize / 2;
+	if (x < -limit || x > limit){
 		return 0;
 	}
-	if (z < -256 || z > 256){
+	if (z < -limit || z > limit){
 		return 0;
 	}
 	int row = heightmapSize / 2 - z;
@@ -75,7 +79,7 @@ void Terrain::generateVertex(){
 
 			//顶点y值按灰度值的比例确定
 			//vertex[idx] = { x, ((float)heightmapData[idx]) / 255.0 * TERRAIN_MAX_HEIGHT, z, col*delta, row * delta };
-			vertex[idx] = TerrainVertex(x, ((float)heightmapData[idx]) / 255.0 * TERRAIN_MAX_HEIGHT, z, col*delta, row * delta);
+			vertex[idx] = TerrainVertex(x*texScale, ((float)heightmapData[idx]) / 255.0 * TERRAIN_MAX_HEIGHT, z*texScale, col*delta, row * delta);
 			//vertex[idx] = TerrainVertex(x, 0.0f, z, col*delta, row * delta);
 		}
 	}

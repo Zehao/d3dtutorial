@@ -98,8 +98,38 @@ bool initD3d(){
 	return true;
 }
 
-void renderFrame(){
 
+void turnOnLight(){
+
+	//灯光
+	D3DLIGHT9 light;
+	memset(&light, 0, sizeof(light));
+
+	light.Type = D3DLIGHT_DIRECTIONAL;
+	light.Direction = D3DXVECTOR3(-1, -1, 1);//根据天空盒太阳位置得出
+	//light.Direction = D3DXVECTOR3(1, 1, 1);
+	D3DXCOLOR white = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f);
+	light.Ambient = white*0.9f;
+	light.Diffuse = white*0.4f;
+	light.Specular = white*0.5f;
+	//dev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	g_device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+
+	g_device->SetRenderState(D3DRS_ZENABLE, TRUE);
+	g_device->SetRenderState(D3DRS_LIGHTING, TRUE); //灯光
+
+	g_device->SetLight(0, &light);
+	g_device->LightEnable(0, true);
+	g_device->SetRenderState(D3DRS_NORMALIZENORMALS, true);
+	g_device->SetRenderState(D3DRS_SPECULARENABLE, true);
+	g_device->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
+	g_device->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
+	g_device->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_POINT);
+	//dev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 }
- 
+
+void turnOffLight(){
+	g_device->SetRenderState(D3DRS_LIGHTING, FALSE); 
+}
+
 #endif

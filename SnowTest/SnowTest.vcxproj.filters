@@ -39,6 +39,12 @@
     <ClCompile Include="SnowMan.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="XFileObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="House.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="d3dutility.h">
@@ -57,6 +63,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SnowMan.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XFileObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="House.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

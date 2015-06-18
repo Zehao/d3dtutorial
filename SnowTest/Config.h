@@ -4,7 +4,10 @@
 
 const int g_width = 1024;
 const int g_height = 768;
-const int CAM_MOVESPEED = 8;
+
+const int CAM_MOVE_SPEED = 30;
+const int CAM_ROTATE_SPEED = 20;
+
 HWND g_hwnd = 0;
 
 

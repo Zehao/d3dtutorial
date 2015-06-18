@@ -68,17 +68,21 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="d3dutility.h" />
+    <ClInclude Include="House.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="SnowMan.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="XFileObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="House.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="SnowMan.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="XFileObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\hm.raw" />

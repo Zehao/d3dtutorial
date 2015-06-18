@@ -28,6 +28,7 @@ class Terrain
 {
 private:
 	int heightmapSize;
+	int texScale;                                     //对应贴图的放大比例
 	unsigned char *heightmapData;  //地形数据
 	IDirect3DTexture9 *tex;              //纹理
 	IDirect3DDevice9* dev;
@@ -36,7 +37,7 @@ private:
 
 public:
 	void initTexture(std::string path);
-	void initHeightMap(std::string rawHeightmapPath , int size);//高度图位置与边长
+	void initHeightMap(std::string rawHeightmapPath , int size,int scale);//高度图位置与边长
 	void draw();
 	void generateVertex();
 

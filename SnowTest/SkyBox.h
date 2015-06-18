@@ -9,7 +9,7 @@
 /*
 	天空盒边长，其为一个立方体
 */
-static const int SKYBOX_SIZE = 512;
+static const int SKYBOX_SIZE = 1024;
 
 /*
 	天空盒顶点格式
