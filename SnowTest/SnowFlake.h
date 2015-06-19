@@ -22,14 +22,18 @@ struct SnowFlake
 {
 	D3DXVECTOR3 position;
 	float velocity;
+
+	float rotationX;
 	float rotationY;
-	float rotationSpeed; //绕Y轴旋转速度
+	float rotationZ;
+
+	float rotationSpeed; 
 
 };
 
 //范围
-const int SNOW_FLAKE_MAX_X = 512;
-const int SNOW_FLAKE_MAX_Z = 800;
+const int SNOW_FLAKE_MAX_X = 1024;
+const int SNOW_FLAKE_MAX_Y = 800;
 
 /*
 	雪花管理类
@@ -46,9 +50,6 @@ private:
 private:
 	SnowFlake *snowFlake; //雪花粒子数组
 	int snowFlakeNum;       //数量
-	int snowFlakeSize;
-
-
 
 public:
 	SnowFlakeManager(IDirect3DDevice9 *device, Terrain *terrain , string snowTexPath, int flakeCnt);

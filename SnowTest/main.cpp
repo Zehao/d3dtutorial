@@ -107,7 +107,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	randomPoints = randPos(30);
 
 
-	SnowFlakeManager *manager = new SnowFlakeManager(g_device, terrain, "res/snowflake", 1000);
+	SnowFlakeManager *manager = new SnowFlakeManager(g_device, terrain, "res/snowflake/snowflake.jpg", 800);
 	manager->initSnowFlakes();
 
 	Projection(60, 1, 1024);
