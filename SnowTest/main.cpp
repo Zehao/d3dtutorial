@@ -7,7 +7,7 @@
 #include "SnowMan.h"
 #include "House.h"
 #include "Tree.h"
-
+#include "SnowFlake.h"
 
 
 #pragma comment (lib, "d3d9.lib")
@@ -106,6 +106,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	vector< vector<int> > randomPoints;
 	randomPoints = randPos(30);
 
+
+	SnowFlakeManager *manager = new SnowFlakeManager(g_device, terrain, "res/snowflake", 1000);
+	manager->initSnowFlakes();
+
 	Projection(60, 1, 1024);
 
 	while (TRUE)
@@ -167,6 +171,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 		previousMousePoint = currentMousePoint;
 
+		manager->updateSnowFlakes(deltaTime);
+
 		//Camera的高度受Terrain当前点的y值控制。
 		D3DXVECTOR3 camPos;
 		camera->getPosition(&camPos);
@@ -216,6 +222,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//关闭灯光
 		turnOffLight();
 
+		manager->draw();
+
 		g_device->EndScene();
 		g_device->Present(NULL, NULL, NULL, NULL);
 
@@ -244,7 +252,7 @@ vector<vector<int> > randPos(int cnt){
 		while (true){
 			x = rand() % 450;
 			y = rand() % 450;
-			if (x*x + y*y > 120 * 120){
+			if (x*x + y*y > 120 * 120){  //房屋所在的圆范围外
 				break;
 			}
 		}

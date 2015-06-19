@@ -70,6 +70,7 @@
     <ClInclude Include="d3dutility.h" />
     <ClInclude Include="House.h" />
     <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="SnowFlake.h" />
     <ClInclude Include="SnowMan.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Config.h" />
@@ -81,6 +82,7 @@
     <ClCompile Include="House.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="SnowFlake.cpp" />
     <ClCompile Include="SnowMan.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Tree.cpp" />
