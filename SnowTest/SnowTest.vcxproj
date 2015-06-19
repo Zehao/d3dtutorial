@@ -73,6 +73,7 @@
     <ClInclude Include="SnowMan.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="Tree.h" />
     <ClInclude Include="XFileObject.h" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +83,7 @@
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="SnowMan.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="Tree.cpp" />
     <ClCompile Include="XFileObject.cpp" />
   </ItemGroup>
   <ItemGroup>

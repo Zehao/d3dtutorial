@@ -30,11 +30,11 @@ void XFileObject::initMesh(){
 		for (int i = 0; i < mtrlCnt; i++){
 			//默认无环境光，添加材质的环境光
 
-			//mtrls[i].MatD3D.Ambient.a = 1;
-			mtrls[i].MatD3D.Diffuse.a = 1.0f;
-			mtrls[i].MatD3D.Emissive.a = 1.0f;
-			mtrls[i].MatD3D.Specular.a = 1.0f;
-			mtrls[i].MatD3D.Ambient.a = 1.0f;
+			////mtrls[i].MatD3D.Ambient.a = 1;
+			//mtrls[i].MatD3D.Diffuse.a = 1.0f;
+			//mtrls[i].MatD3D.Emissive.a = 1.0f;
+			//mtrls[i].MatD3D.Specular.a = 1.0f;
+			//mtrls[i].MatD3D.Ambient.a = 1.0f;
 			mtrls[i].MatD3D.Ambient = mtrls[i].MatD3D.Diffuse;
 			material.push_back(mtrls[i].MatD3D);
 

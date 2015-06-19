@@ -6,6 +6,8 @@
 #include "Terrain.h"
 #include "SnowMan.h"
 #include "House.h"
+#include "Tree.h"
+
 
 
 #pragma comment (lib, "d3d9.lib")
@@ -14,6 +16,7 @@
 
 
 void render(Camera *camera, Terrain *terrain, SkyBox *skybox);
+vector<vector<int> > randPos(int cnt);
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -97,6 +100,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	House *house = new House(g_device, terrain, "res/house/house.x");
 	house->initMesh();
+
+	Tree *tree = new Tree(g_device, terrain, "res/tree/firtree4.x");
+	tree->initMesh();
+	vector< vector<int> > randomPoints;
+	randomPoints = randPos(30);
 
 	Projection(60, 1, 1024);
 
@@ -200,6 +208,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		snowMan->draw(-100, 40, 270);
 		snowMan->draw(-100, -40, 270);
 
+		//随机生成20棵不同位置和大小的树
+		for (int i = 0; i < randomPoints.size(); i++){
+			tree->draw(randomPoints[i][0], randomPoints[i][1], randomPoints[i][2]);
+		}
+		
 		//关闭灯光
 		turnOffLight();
 
@@ -216,7 +229,33 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 }
 
 
+/*
+	生成树的随机位置和大小
 
-void computeMouse(){
+	scale范围为[3,8]
+*/
+vector<vector<int> > randPos(int cnt){
+	vector<vector<int> > v;
+	srand((int)timeGetTime());
 
+	for (int i = 0; i < cnt; i++){
+		int x, y, scale;
+		vector<int> vi;
+		while (true){
+			x = rand() % 450;
+			y = rand() % 450;
+			if (x*x + y*y > 120 * 120){
+				break;
+			}
+		}
+		int sign1 = rand() % 2 == 0 ? 1 : -1;
+		int sign2 = rand() % 2 == 0 ? 1 : -1;
+		
+		scale = rand() % 5 + 3;
+		vi.push_back(x*sign1);
+		vi.push_back(y*sign2);
+		vi.push_back(scale);
+		v.push_back(vi);
+	}
+	return v;
 }

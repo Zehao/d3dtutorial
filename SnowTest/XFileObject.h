@@ -22,7 +22,7 @@ protected:
 
 
 public:
-	XFileObject(IDirect3DDevice9 *device, Terrain *terr, string path);
+	XFileObject(IDirect3DDevice9 *device, Terrain *terr, string path); 
 
 	virtual ~XFileObject();
 
