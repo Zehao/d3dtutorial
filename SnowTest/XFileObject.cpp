@@ -59,3 +59,66 @@ void XFileObject::initMesh(){
 		0, 0, 0);
 	adjBuf->Release();
 }
+
+void XFileObject::renderShadow(D3DLIGHT9 *light,float x ,float z, D3DXMATRIX *transMat){
+
+	dev->SetRenderState(D3DRS_STENCILENABLE, true);
+	dev->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_EQUAL);
+	dev->SetRenderState(D3DRS_STENCILREF, 0x0);
+	dev->SetRenderState(D3DRS_STENCILMASK, 0xffffffff);
+	dev->SetRenderState(D3DRS_STENCILWRITEMASK, 0xffffffff);
+	dev->SetRenderState(D3DRS_STENCILZFAIL, D3DSTENCILOP_KEEP);
+	dev->SetRenderState(D3DRS_STENCILFAIL, D3DSTENCILOP_KEEP);
+	dev->SetRenderState(D3DRS_STENCILPASS, D3DSTENCILOP_INCR); // increment to 1
+
+
+	float height = terrain->getHeight(x, z);
+
+	//平面,根据当前地形高度确定顶点
+	D3DXPLANE plane;
+	D3DXPlaneFromPointNormal(&plane, &D3DXVECTOR3(x, height, z), &D3DXVECTOR3(0, 1, 0));
+
+	//光照
+	D3DXVECTOR3 lightDir(light->Direction);
+	D3DXVec3Normalize(&lightDir, &lightDir);
+
+	D3DXVECTOR4 lightDirection(lightDir.x, lightDir.y, lightDir.z, 0.0f);
+
+	D3DXMATRIX S;
+	D3DXMatrixShadow(
+		&S,
+		&lightDirection,
+		&plane);
+
+	D3DXMATRIX W = (*transMat) * S;
+	dev->SetTransform(D3DTS_WORLD, &W);
+
+	// alpha blend the shadow
+	dev->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+	dev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	dev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+
+	
+
+	D3DMATERIAL9 mtrl;
+	mtrl.Ambient = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
+	mtrl.Diffuse = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
+	mtrl.Specular = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
+	mtrl.Emissive = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
+	mtrl.Power = 0;
+	mtrl.Diffuse.a = 0.5f; // 50% transparency.
+
+	// Disable depth buffer so that z-fighting doesn't occur when we
+	// render the shadow on top of the floor.
+	dev->SetRenderState(D3DRS_ZENABLE, false);
+
+	dev->SetMaterial(&mtrl);
+	dev->SetTexture(0, 0);
+	for (int i = 0; i < material.size(); i++){
+		mesh->DrawSubset(i);
+	}
+
+	dev->SetRenderState(D3DRS_ZENABLE, true);
+	dev->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
+	dev->SetRenderState(D3DRS_STENCILENABLE, false);
+}

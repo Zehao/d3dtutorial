@@ -81,6 +81,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	// enter the main loop:
 
+	D3DLIGHT9 light;
+
 	MSG msg;
 	
 	Camera *camera = new Camera(&D3DXVECTOR3(160,0,0));
@@ -91,12 +93,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	skybox->initVertexs();
 
 	Terrain *terrain = new Terrain(g_device);
-	terrain->initTexture("res/terrain.bmp");
-	terrain->initHeightMap("res/heightmapdata2.raw", 257,SKYBOX_SIZE/256);
+	terrain->initTexture("res/terrain/terrain.bmp");
+	terrain->initHeightMap("res/heightmap/heightmap.raw", 257,SKYBOX_SIZE/256);
 	terrain->generateVertex();
 
-	SnowMan *snowMan = new SnowMan(g_device, terrain, "res/Snowman2.x");
+	SnowMan *snowMan = new SnowMan(g_device, terrain, "res/snowman/snowman.x");
 	snowMan->initMesh();
+	snowMan->setLight(&light);
 
 	House *house = new House(g_device, terrain, "res/house/house.x");
 	house->initMesh();
@@ -107,7 +110,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	randomPoints = randPos(30);
 
 
-	SnowFlakeManager *manager = new SnowFlakeManager(g_device, terrain, "res/snowflake/snowflake.jpg", 800);
+	SnowFlakeManager *manager = new SnowFlakeManager(g_device, terrain, "res/snowflake/snowflake.dds", 1500);
 	manager->initSnowFlakes();
 
 	Projection(60, 1, 1024);
@@ -191,7 +194,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		terrain->draw();
 
 		//打开灯光
-		turnOnLight();
+		turnOnLight(light);
 
 		house->draw(0,0);
 
@@ -220,7 +223,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 		
 		//关闭灯光
-		turnOffLight();
+		turnOffLight(light);
 
 		manager->draw();
 

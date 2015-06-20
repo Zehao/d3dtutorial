@@ -141,9 +141,9 @@ void Terrain::draw(){
 	dev->SetIndices(ibuf);
 
 	dev->SetTexture(0, this->tex);
-	//dev->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_MODULATE);
-	//dev->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
-	//dev->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
+	dev->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_MODULATE);
+	dev->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+	dev->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
 
 
 	//dev->SetRenderState(D3DRS_LIGHTING, false);

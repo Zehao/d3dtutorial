@@ -28,6 +28,7 @@ public:
 
 public :
 	void initMesh();
+	void renderShadow(D3DLIGHT9 *light, float x, float z, D3DXMATRIX *transMat);
 	virtual void draw(float x, float z ) = 0;
 };
 

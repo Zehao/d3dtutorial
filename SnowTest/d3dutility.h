@@ -99,10 +99,10 @@ bool initD3d(){
 }
 
 
-void turnOnLight(){
+void turnOnLight(D3DLIGHT9 &light){
 
 	//ตฦนโ
-	D3DLIGHT9 light;
+	//D3DLIGHT9 light;
 	memset(&light, 0, sizeof(light));
 
 	light.Type = D3DLIGHT_DIRECTIONAL;
@@ -128,7 +128,7 @@ void turnOnLight(){
 	//dev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 }
 
-void turnOffLight(){
+void turnOffLight(D3DLIGHT9 &light){
 	g_device->SetRenderState(D3DRS_LIGHTING, FALSE); 
 }
 

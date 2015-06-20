@@ -50,5 +50,8 @@ void SnowMan::draw(float x, float z, float rotationAngle){
 		dev->SetTexture(0, texture[i]);
 		mesh->DrawSubset(i);
 	}
-
+	this->renderShadow(light, x, z, &mat);
+}
+void SnowMan::setLight(D3DLIGHT9 *li){
+	light = li;
 }
