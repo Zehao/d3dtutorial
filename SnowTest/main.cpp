@@ -106,6 +106,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	Tree *tree = new Tree(g_device, terrain, "res/tree/firtree4.x");
 	tree->initMesh();
+	tree->setLight(&light);
 	vector< vector<int> > randomPoints;
 	randomPoints = randPos(30);
 

@@ -36,4 +36,10 @@ void Tree::draw(float x, float z ,float scale){
 		dev->SetTexture(0, texture[i]);
 		mesh->DrawSubset(i);
 	}
+
+	this->renderShadow(light, x, z, &mat);
+}
+
+void Tree::setLight(D3DLIGHT9 *li){
+	light = li;
 }

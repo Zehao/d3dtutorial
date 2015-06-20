@@ -76,7 +76,7 @@ void XFileObject::renderShadow(D3DLIGHT9 *light,float x ,float z, D3DXMATRIX *tr
 
 	//平面,根据当前地形高度确定顶点
 	D3DXPLANE plane;
-	D3DXPlaneFromPointNormal(&plane, &D3DXVECTOR3(x, height, z), &D3DXVECTOR3(0, 1, 0));
+	D3DXPlaneFromPointNormal(&plane, &D3DXVECTOR3(x, height+0.1f, z), &D3DXVECTOR3(0, -1, 0));
 
 	//光照
 	D3DXVECTOR3 lightDir(light->Direction);
@@ -106,11 +106,11 @@ void XFileObject::renderShadow(D3DLIGHT9 *light,float x ,float z, D3DXMATRIX *tr
 	mtrl.Specular = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
 	mtrl.Emissive = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
 	mtrl.Power = 0;
-	mtrl.Diffuse.a = 0.5f; // 50% transparency.
+	mtrl.Diffuse.a = 0.4f; // 50% transparency.
 
 	// Disable depth buffer so that z-fighting doesn't occur when we
 	// render the shadow on top of the floor.
-	dev->SetRenderState(D3DRS_ZENABLE, false);
+	dev->SetRenderState(D3DRS_ZENABLE, true);
 
 	dev->SetMaterial(&mtrl);
 	dev->SetTexture(0, 0);
