@@ -16,7 +16,7 @@ void House::draw(float x, float z){
 	D3DXVECTOR3 pos;
 	pos.x = x;
 	pos.z = z;
-	pos.y = terrain->getHeight(pos.x, pos.z) + 26.0f; //调整房子高度
+	pos.y = terrain->getHeight(pos.x, pos.z) + 23.0f; //调整房子高度
 
 	D3DXMATRIX matTrans;
 	D3DXMatrixTranslation(&matTrans, pos.x, pos.y, pos.z);
@@ -29,4 +29,6 @@ void House::draw(float x, float z){
 		dev->SetTexture(0, texture[i]);
 		mesh->DrawSubset(i);
 	}
+
+	this->renderShadow(light, x, z, &matTrans);
 }

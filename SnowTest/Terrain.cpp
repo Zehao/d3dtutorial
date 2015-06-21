@@ -101,15 +101,6 @@ void Terrain::generateVertex(){
 	for (int i = 0; i < heightmapSize-1; i++){
 		for (int j = 0; j < heightmapSize-1; j++){
 
-			//index[cur] = heightmapSize*i + j;
-			//index[cur + 1] = heightmapSize*i + j + 1;
-			//index[cur + 2] = heightmapSize*(i + 1) + j + 1;
-
-			//index[cur + 3] = heightmapSize*(i + 1) + j + 1;
-			//index[cur + 4] = heightmapSize*(i + 1) + j;
-			//index[cur + 5] = heightmapSize*i + j;
-
-
 			index[cur] = heightmapSize*i + j;
 			index[cur + 1] = heightmapSize*i + j + 1;
 			index[cur + 2] = heightmapSize*(i + 1) + j ;
@@ -120,7 +111,6 @@ void Terrain::generateVertex(){
 			cur += 6;
 		}
 	}
-
 
 	ibuf->Unlock();
 
@@ -141,9 +131,10 @@ void Terrain::draw(){
 	dev->SetIndices(ibuf);
 
 	dev->SetTexture(0, this->tex);
-	dev->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_MODULATE);
+
+	/*dev->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_MODULATE);
 	dev->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
-	dev->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
+	dev->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);*/
 
 
 	//dev->SetRenderState(D3DRS_LIGHTING, false);

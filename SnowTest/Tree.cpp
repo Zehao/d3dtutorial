@@ -39,7 +39,3 @@ void Tree::draw(float x, float z ,float scale){
 
 	this->renderShadow(light, x, z, &mat);
 }
-
-void Tree::setLight(D3DLIGHT9 *li){
-	light = li;
-}

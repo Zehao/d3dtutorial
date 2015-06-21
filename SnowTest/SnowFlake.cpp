@@ -26,7 +26,7 @@ void SnowFlakeManager::initSnowFlakes(){
 	
 
 	HRESULT result = dev->CreateVertexBuffer(sizeof(SnowFlake)*4,
-								0,SnowFlakeVertex::FVF, //动态缓冲
+								0,SnowFlakeVertex::FVF, 
 								D3DPOOL::D3DPOOL_MANAGED, &vbuf, 0);
 	if (FAILED(result)){
 		MessageBox(0, "SnowFlakeManager::initSnowFlakes CreateVertexBuffer failed",0, 0);
@@ -34,7 +34,7 @@ void SnowFlakeManager::initSnowFlakes(){
 
 	SnowFlakeVertex *vertex;
 
-	float s = 1.5;
+	float s = 1.8;
 	SnowFlakeVertex snowPlane[] = {
 		{-s, -s ,0 , 0, 1},
 		{ -s, s, 0, 0, 0 },
@@ -80,13 +80,6 @@ void SnowFlakeManager::draw(){
 	//从纹理中获取alpha通道
 	dev->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1);
 	dev->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
-	//将纹理颜色值输出  
-	//dev->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);  
-	//dev->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE); 
-	//dev->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
-	//dev->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
-	//dev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_SRCALPHA );
-	//dev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
 	//源混合是当前纹理alpha，背景的alpha为1
 	dev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);

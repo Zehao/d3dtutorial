@@ -13,15 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="资源文件\res">
-      <UniqueIdentifier>{e569f172-5e1d-442b-8000-c8ae3d493d8f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="资源文件\res\snowblind">
-      <UniqueIdentifier>{e156f122-01ec-4108-9961-1a959819a6a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="资源文件\res\wintermount">
-      <UniqueIdentifier>{ad01ad61-d514-4bb7-8620-1e0141a94a95}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -65,9 +56,6 @@
     <ClInclude Include="Terrain.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Config.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="SnowMan.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -83,54 +71,5 @@
     <ClInclude Include="SnowFlake.h">
       <Filter>头文件</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\myheight.psd">
-      <Filter>资源文件\res</Filter>
-    </None>
-    <None Include="res\myheight.raw">
-      <Filter>资源文件\res</Filter>
-    </None>
-    <None Include="res\hm.raw">
-      <Filter>资源文件\res</Filter>
-    </None>
-    <None Include="res\Snowman.x">
-      <Filter>资源文件\res</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="res\wintermount\back.jpg">
-      <Filter>资源文件\res\wintermount</Filter>
-    </Image>
-    <Image Include="res\wintermount\front.jpg">
-      <Filter>资源文件\res\wintermount</Filter>
-    </Image>
-    <Image Include="res\wintermount\left.jpg">
-      <Filter>资源文件\res\wintermount</Filter>
-    </Image>
-    <Image Include="res\wintermount\right.jpg">
-      <Filter>资源文件\res\wintermount</Filter>
-    </Image>
-    <Image Include="res\wintermount\top.jpg">
-      <Filter>资源文件\res\wintermount</Filter>
-    </Image>
-    <Image Include="res\snowblind\back.jpg">
-      <Filter>资源文件\res\snowblind</Filter>
-    </Image>
-    <Image Include="res\snowblind\front.jpg">
-      <Filter>资源文件\res\snowblind</Filter>
-    </Image>
-    <Image Include="res\snowblind\left.jpg">
-      <Filter>资源文件\res\snowblind</Filter>
-    </Image>
-    <Image Include="res\snowblind\right.jpg">
-      <Filter>资源文件\res\snowblind</Filter>
-    </Image>
-    <Image Include="res\snowblind\top.jpg">
-      <Filter>资源文件\res\snowblind</Filter>
-    </Image>
-    <Image Include="res\terrainTex.jpg">
-      <Filter>资源文件\res</Filter>
-    </Image>
   </ItemGroup>
 </Project>

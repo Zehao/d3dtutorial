@@ -52,6 +52,3 @@ void SnowMan::draw(float x, float z, float rotationAngle){
 	}
 	this->renderShadow(light, x, z, &mat);
 }
-void SnowMan::setLight(D3DLIGHT9 *li){
-	light = li;
-}

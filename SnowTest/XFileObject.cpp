@@ -60,6 +60,12 @@ void XFileObject::initMesh(){
 	adjBuf->Release();
 }
 
+
+
+void XFileObject::setLight(D3DLIGHT9 *li){
+	light = li;
+}
+
 void XFileObject::renderShadow(D3DLIGHT9 *light,float x ,float z, D3DXMATRIX *transMat){
 
 	dev->SetRenderState(D3DRS_STENCILENABLE, true);

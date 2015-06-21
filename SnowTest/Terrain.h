@@ -9,8 +9,6 @@
 	地形类.
 	通过加载灰度图来设置地形高度，TERRAIN_MAX_HEIGHT设置地形的最大高度，以此按比例缩放
 	高度。
-
-
 */
 
 const int TERRAIN_MAX_HEIGHT = 100;

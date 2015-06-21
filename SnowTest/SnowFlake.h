@@ -16,7 +16,8 @@ struct SnowFlakeVertex
 };
 
 /*
-	雪花
+	雪花。
+	真实的雪花必须以不同的方向来面向镜头，因此必须加入旋转，且不采用粒子系统。
 */
 struct SnowFlake
 {
@@ -31,9 +32,9 @@ struct SnowFlake
 
 };
 
-//范围
+//雪花飘落范围
 const int SNOW_FLAKE_MAX_X = 1024;
-const int SNOW_FLAKE_MAX_Y = 800;
+const int SNOW_FLAKE_MAX_Y = 500;
 
 /*
 	雪花管理类

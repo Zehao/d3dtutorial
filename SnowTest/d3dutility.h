@@ -1,21 +1,31 @@
 #ifndef __D3DUTILITY_H__
 #define __D3DUTILITY_H__
-/*
-	dx3d中一些常用函数和数据结构的封装
 
-*/
 #include <d3d9.h>
 #include <d3dx9.h>
-#include "Config.h"
+#include <string>
+#include <vector>
+using namespace std;
 
-//global
+//全局变量
 IDirect3D9* g_d3d = 0;
 IDirect3DDevice9* g_device = 0;
+D3DLIGHT9 g_light;  //全局灯光
+HWND g_hwnd = 0;
 
-D3DXVECTOR3 CAMERA_Y(0.0f, 1.0f, 0.0f);
+//窗口大小
+const int g_width = 1024;
+const int g_height = 768;
 
+//摄像机移动速度
+const int CAM_MOVE_SPEED = 30;
+const int CAM_ROTATE_SPEED = 20;
 
+#define KEY_DOWN(vk_code) (GetAsyncKeyState(vk_code) & 0x8000 ? 1 : 0)
 
+#define KEY_UP(vk_code) (GetAsyncKeyState(vk_code) & 0x8000 ? 0 : 1)
+
+//投影
 void Projection(int angleDegree , float nearZ , float farZ ){
 	D3DXMATRIX proj;
 	D3DXMatrixPerspectiveFovLH(&proj,
@@ -26,28 +36,14 @@ void Projection(int angleDegree , float nearZ , float farZ ){
 	g_device->SetTransform(D3DTS_PROJECTION, &proj);
 }
 
-
-void Viewport(const D3DXVECTOR3 &position, const D3DXVECTOR3 &target, const D3DXVECTOR3 &upside = CAMERA_Y){
-
-	D3DXMATRIX V;
-	D3DXMatrixLookAtLH(
-		&V,
-		&position,
-		&target,
-		&upside);
-	g_device->SetTransform(D3DTS_VIEW, &V);
-}
-
-
+//初始化D3D
 bool initD3d(){
 	g_d3d = Direct3DCreate9(D3D_SDK_VERSION);
 
-	if (!g_d3d){
+	if (FAILED(g_d3d)){
 		MessageBox(0, "Direct3DCreate9  FAILED", 0, 0);
 		return false;
 	}
-
-
 
 	D3DPRESENT_PARAMETERS params;
 	memset(&params, 0, sizeof(params));
@@ -99,7 +95,7 @@ bool initD3d(){
 }
 
 
-void turnOnLight(D3DLIGHT9 &light){
+void initLight(D3DLIGHT9 &light){
 
 	//灯光
 	//D3DLIGHT9 light;
@@ -116,9 +112,14 @@ void turnOnLight(D3DLIGHT9 &light){
 	g_device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 
 	g_device->SetRenderState(D3DRS_ZENABLE, TRUE);
-	g_device->SetRenderState(D3DRS_LIGHTING, TRUE); //灯光
+	
+}
 
-	g_device->SetLight(0, &light);
+
+void turnOnLight(){
+	g_device->SetRenderState(D3DRS_LIGHTING, TRUE);
+
+	g_device->SetLight(0, &g_light);
 	g_device->LightEnable(0, true);
 	g_device->SetRenderState(D3DRS_NORMALIZENORMALS, true);
 	g_device->SetRenderState(D3DRS_SPECULARENABLE, true);
@@ -128,8 +129,39 @@ void turnOnLight(D3DLIGHT9 &light){
 	//dev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 }
 
-void turnOffLight(D3DLIGHT9 &light){
+void turnOffLight(){
 	g_device->SetRenderState(D3DRS_LIGHTING, FALSE); 
+}
+
+/*
+围绕房屋所在的范围，随机生成树的位置和大小
+scale范围为[3,8]
+*/
+vector<vector<int> > randPos(int cnt){
+	vector<vector<int> > v;
+	int range = 150;
+	srand((int)timeGetTime());
+
+	for (int i = 0; i < cnt; i++){
+		int x, y, scale;
+		vector<int> vi;
+		while (true){
+			x = rand() % 450;
+			y = rand() % 450;
+			if (x*x + y*y >= range * range){  //房屋所在的圆范围外
+				break;
+			}
+		}
+		int sign1 = rand() % 2 == 0 ? 1 : -1;
+		int sign2 = rand() % 2 == 0 ? 1 : -1;
+
+		scale = rand() % 5 + 3;
+		vi.push_back(x*sign1);
+		vi.push_back(y*sign2);
+		vi.push_back(scale);
+		v.push_back(vi);
+	}
+	return v;
 }
 
 #endif

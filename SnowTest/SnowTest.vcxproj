@@ -73,7 +73,6 @@
     <ClInclude Include="SnowFlake.h" />
     <ClInclude Include="SnowMan.h" />
     <ClInclude Include="Terrain.h" />
-    <ClInclude Include="Config.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="XFileObject.h" />
   </ItemGroup>
@@ -87,25 +86,6 @@
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="XFileObject.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\hm.raw" />
-    <None Include="res\myheight.psd" />
-    <None Include="res\myheight.raw" />
-    <None Include="res\Snowman.x" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="res\snowblind\back.jpg" />
-    <Image Include="res\snowblind\front.jpg" />
-    <Image Include="res\snowblind\left.jpg" />
-    <Image Include="res\snowblind\right.jpg" />
-    <Image Include="res\snowblind\top.jpg" />
-    <Image Include="res\terrainTex.jpg" />
-    <Image Include="res\wintermount\back.jpg" />
-    <Image Include="res\wintermount\front.jpg" />
-    <Image Include="res\wintermount\left.jpg" />
-    <Image Include="res\wintermount\right.jpg" />
-    <Image Include="res\wintermount\top.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
